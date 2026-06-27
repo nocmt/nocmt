@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f8f6f2" />
+    <title>NOCMT - 我的作品集</title>
+    <meta name="keywords" content="NOCMT, 作品集, 设计师，烽翎，Flare LaunchPad,SubFlowAI" />
+    <meta name="description" content="NOCMT - 我的作品集，展示我的设计作品和创意项目。" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet" />
+    <script>
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('preferredTheme');
+                const themeMode = ['auto', 'light', 'dark'].includes(savedTheme) ? savedTheme : 'auto';
+                const mediaPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const hour = new Date().getHours();
+                const isNightFallback = hour >= 18 || hour < 6;
+                const systemTheme = mediaPrefersDark || isNightFallback ? 'dark' : 'light';
+                const resolvedTheme = themeMode === 'auto' ? systemTheme : themeMode;
+                const themeSource = themeMode === 'auto' ? (mediaPrefersDark ? 'media-query' : isNightFallback ? 'night-fallback' : 'media-query') : 'manual';
+
+                document.documentElement.setAttribute('data-theme-mode', themeMode);
+                document.documentElement.setAttribute('data-theme', resolvedTheme);
+                document.documentElement.setAttribute('data-theme-source', themeSource);
+            } catch (error) {
+                console.debug(`【偏好设置】预置主题读取失败：reason=${error.message}`);
+            }
+        })();
+    </script>
+    <style>
+        /* ----- CSS 变量（浅色默认） ----- */
+        :root {
+            --bg-primary: #f8f6f2;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #3a3a3a;
+            --text-muted: #6b6b6b;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(0, 0, 0, 0.06);
+            --badge-bg: rgba(0, 0, 0, 0.04);
+            --badge-border: rgba(0, 0, 0, 0.06);
+            --btn-primary-bg: #1a1a1a;
+            --btn-primary-text: #ffffff;
+            --btn-outline-border: rgba(0, 0, 0, 0.15);
+            --btn-outline-hover: rgba(0, 0, 0, 0.05);
+            --dot-bg: rgba(0, 0, 0, 0.15);
+            --dot-active: #1a1a1a;
+            --scroll-hint: rgba(0, 0, 0, 0.15);
+            --gradient-start: #1a1a1a;
+            --gradient-end: #555555;
+            --tag-bg: rgba(0, 0, 0, 0.04);
+            --tag-border: rgba(0, 0, 0, 0.06);
+            --tag-text: #3a3a3a;
+            --modal-overlay: rgba(0, 0, 0, 0.6);
+            --modal-bg: #ffffff;
+            --modal-text: #1a1a1a;
+            --modal-border: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ----- 深色主题变量 ----- */
+        [data-theme="dark"] {
+            --bg-primary: #0b0b0b;
+            --bg-secondary: #161616;
+            --text-primary: #f5f5f5;
+            --text-secondary: #c0c0c0;
+            --text-muted: #888888;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --badge-bg: rgba(255, 255, 255, 0.06);
+            --badge-border: rgba(255, 255, 255, 0.08);
+            --btn-primary-bg: #ffffff;
+            --btn-primary-text: #0b0b0b;
+            --btn-outline-border: rgba(255, 255, 255, 0.2);
+            --btn-outline-hover: rgba(255, 255, 255, 0.06);
+            --dot-bg: rgba(255, 255, 255, 0.2);
+            --dot-active: #ffffff;
+            --scroll-hint: rgba(255, 255, 255, 0.2);
+            --gradient-start: #ffffff;
+            --gradient-end: #a0a0a0;
+            --tag-bg: rgba(255, 255, 255, 0.06);
+            --tag-border: rgba(255, 255, 255, 0.06);
+            --tag-text: rgba(255, 255, 255, 0.6);
+            --modal-overlay: rgba(0, 0, 0, 0.8);
+            --modal-bg: #1e1e1e;
+            --modal-text: #f5f5f5;
+            --modal-border: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg-primary: #0b0b0b;
+                --bg-secondary: #161616;
+                --text-primary: #f5f5f5;
+                --text-secondary: #c0c0c0;
+                --text-muted: #888888;
+                --card-bg: rgba(255, 255, 255, 0.04);
+                --card-border: rgba(255, 255, 255, 0.06);
+                --badge-bg: rgba(255, 255, 255, 0.06);
+                --badge-border: rgba(255, 255, 255, 0.08);
+                --btn-primary-bg: #ffffff;
+                --btn-primary-text: #0b0b0b;
+                --btn-outline-border: rgba(255, 255, 255, 0.2);
+                --btn-outline-hover: rgba(255, 255, 255, 0.06);
+                --dot-bg: rgba(255, 255, 255, 0.2);
+                --dot-active: #ffffff;
+                --scroll-hint: rgba(255, 255, 255, 0.2);
+                --gradient-start: #ffffff;
+                --gradient-end: #a0a0a0;
+                --tag-bg: rgba(255, 255, 255, 0.06);
+                --tag-border: rgba(255, 255, 255, 0.06);
+                --tag-text: rgba(255, 255, 255, 0.6);
+                --modal-overlay: rgba(0, 0, 0, 0.8);
+                --modal-bg: #1e1e1e;
+                --modal-text: #f5f5f5;
+                --modal-border: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* ----- 全局重置 ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        /* ----- 顶部切换栏 ----- */
+        .top-controls {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .top-controls button {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            padding: 0.45rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: inherit;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .top-controls button:hover {
+            background: var(--badge-bg);
+            transform: scale(1.03);
+        }
+
+        .top-controls .icon {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        @media (max-width: 640px) {
+            .top-controls {
+                top: 1rem;
+                right: 1rem;
+                gap: 0.5rem;
+            }
+
+            .top-controls button {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.7rem;
+            }
+
+            .top-controls .icon {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ----- 滚动容器 ----- */
+        .scroll-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ----- 每个 section ----- */
+        .section {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            will-change: transform, opacity;
+            opacity: 0;
+            transform: translateY(30px) scale(0.97);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.4s ease;
+            background: var(--bg-primary);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .section.exit {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.97);
+            transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.4s ease;
+        }
+
+        .section:first-of-type.visible {
+            transform: translateY(0) scale(1);
+        }
+
+        .section:first-of-type.exit {
+            transform: translateY(-20px) scale(0.97);
+        }
+
+        /* ----- 内容样式 ----- */
+        .content {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .section .badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--badge-border);
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            transition: background 0.4s, border 0.4s, color 0.4s;
+        }
+
+        .section h1 {
+            font-size: clamp(2.6rem, 10vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, var(--gradient-start) 40%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: background 0.4s ease;
+        }
+
+        .section h2 {
+            font-size: clamp(2rem, 7vw, 3.6rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gradient-start) 40%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: background 0.4s ease;
+        }
+
+        .section p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 1.8rem;
+            transition: color 0.4s ease;
+        }
+
+        .section .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .section .tech-tags span {
+            background: var(--tag-bg);
+            border: 1px solid var(--tag-border);
+            border-radius: 100px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--tag-text);
+            transition: background 0.4s, border 0.4s, color 0.4s;
+        }
+
+        .section .btn {
+            display: inline-block;
+            background: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            padding: 0.7rem 2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .section .btn:hover {
+            transform: scale(1.04);
+            opacity: 0.9;
+        }
+
+        .section .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--btn-outline-border);
+        }
+
+        .section .btn-outline:hover {
+            background: var(--btn-outline-hover);
+            border-color: var(--text-muted);
+        }
+
+        /* 作品卡片 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            width: 100%;
+            max-width: 720px;
+            margin: 1.5rem auto 0;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            text-align: left;
+            transition: background 0.3s ease, transform 0.3s ease, border 0.3s ease;
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            background: var(--badge-bg);
+            transform: translateY(-4px);
+        }
+
+        .project-card .emoji {
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .project-card .tags {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            opacity: 0.7;
+            letter-spacing: 0.02em;
+        }
+
+        .project-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+            max-width: 100%;
+            transition: color 0.4s ease;
+        }
+
+        /* 页码指示器 */
+        .pagination {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 10;
+        }
+
+        .pagination .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--dot-bg);
+            transition: background 0.4s ease, transform 0.4s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        .pagination .dot.active {
+            background: var(--dot-active);
+            transform: scale(1.3);
+        }
+
+        .pagination .dot:hover {
+            opacity: 0.8;
+        }
+
+        /* 滚动提示 */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--scroll-hint);
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            animation: floatDown 2.4s ease-in-out infinite;
+            pointer-events: none;
+            transition: color 0.4s ease;
+        }
+
+        @keyframes floatDown {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px);
+                opacity: 0.8;
+            }
+        }
+
+        /* ----- 模态框样式 ----- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            border-radius: 24px;
+            max-width: 640px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--modal-border);
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease;
+            color: var(--modal-text);
+            text-align: left;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            background: var(--badge-bg);
+        }
+
+        .modal-media {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            background: var(--bg-primary);
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .modal-media img,
+        .modal-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--modal-text);
+        }
+
+        .modal-content .tags {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            opacity: 0.7;
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .modal-content .btn {
+            display: inline-block;
+            background: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            padding: 0.6rem 1.8rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-content .btn:hover {
+            transform: scale(1.04);
+            opacity: 0.9;
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                padding: 1.2rem;
+            }
+
+            .modal-media {
+                aspect-ratio: 16 / 9;
+            }
+
+            .modal-content h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ----- 响应式 ----- */
+        @media (max-width: 640px) {
+            .section {
+                padding: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+
+            .project-card {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .pagination {
+                right: 1rem;
+                gap: 0.5rem;
+            }
+
+            .pagination .dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section .badge {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.9rem;
+            }
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--dot-bg);
+            border-radius: 10px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--dot-active);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 右上角控制按钮 -->
+    <div class="top-controls">
+        <button id="themeToggle" aria-label="切换深浅色模式">
+            <span class="icon" id="themeIcon">☀️</span>
+            <span id="themeLabel">浅色</span>
+        </button>
+        <button id="langToggle" aria-label="切换语言">
+            <span class="icon" id="langIcon">🌐</span>
+            <span id="langLabel">中文</span>
+        </button>
+    </div>
+
+    <!-- 侧边导航点 -->
+    <nav class="pagination" id="pagination" aria-label="页面导航"></nav>
+
+    <!-- 滚动容器 -->
+    <div class="scroll-container" id="scrollContainer">
+
+        <!-- ===== 第1屏：首页 ===== -->
+        <section class="section" data-index="0" id="section-0">
+            <div class="content">
+                <div class="badge" data-i18n="badge-home">✦ 2026 作品集</div>
+                <h1 data-i18n="title-home">打造有温度的<br />数字产品</h1>
+                <p data-i18n="desc-home">独立开发者 · AI产品经理 · 专注于优雅的交互与流畅的体验。下面是我近期的一些软件作品。</p>
+                <a href="#section-1" class="btn" data-i18n="btn-explore">探索作品 ↓</a>
+            </div>
+            <div class="scroll-hint" data-i18n="scroll-hint">滚动探索</div>
+        </section>
+
+        <!-- ===== 第2屏：作品展示 ===== -->
+        <section class="section" data-index="1" id="section-1">
+            <div class="content">
+                <div class="badge" data-i18n="badge-projects">📦 精选项目</div>
+                <h2 data-i18n="title-projects">我的作品</h2>
+                <p data-i18n="desc-projects">每一个项目都从解决真实问题出发，注重细节与品质。</p>
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- 由 JS 动态生成 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 第3屏：技术栈 ===== -->
+        <section class="section" data-index="2" id="section-2">
+            <div class="content">
+                <div class="badge" data-i18n="badge-tech">⚙️ 技术栈</div>
+                <h2 data-i18n="title-tech">常用工具</h2>
+                <p data-i18n="desc-tech">灵活运用现代技术栈，快速构建可靠的产品。</p>
+                <div class="tech-tags">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>Node.js</span>
+                    <span>Swift</span>
+                    <span>Figma</span>
+                    <span>Python</span>
+                </div>
+                <a href="#section-1" class="btn btn-outline" data-i18n="btn-more">查看作品 →</a>
+            </div>
+        </section>
+
+        <!-- ===== 第4屏：关于 / 联系 ===== -->
+        <section class="section" data-index="3" id="section-3">
+            <div class="content">
+                <div class="badge" data-i18n="badge-contact">👋 联系</div>
+                <h2 data-i18n="title-contact">一起合作</h2>
+                <p data-i18n="desc-contact">如果你有有趣的想法，或者想聊聊设计、开发，欢迎随时联系。</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://github.com/nocmt" target="_blank" class="btn" data-i18n="btn-github">GitHub</a>
+                    <a href="https://xhslink.com/m/6CrbCjwwY56" target="_blank" class="btn btn-outline"
+                        style="display: inline-flex; align-items: center; gap: 0.5rem;background: #ff2442; color: #fff; border: none;"
+                        data-i18n="btn-xiaohongshu">
+                        <span data-i18n="btn-xiaohongshu">小红书</span>
+                    </a>
+                    <a href="mailto:nocmtone@gmail.com" class="btn btn-outline" data-i18n="btn-email">Email</a>
+                </div>
+                <p style="margin-top: 2.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                    © 2026 · 手工打造
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ===== 模态框 ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-media" id="modalMedia">
+                <img src="" alt="作品展示" id="modalImage" />
+            </div>
+            <h2 id="modalTitle">项目名称</h2>
+            <p class="tags" id="modalTags">项目标签</p>
+            <p id="modalDesc">项目描述</p>
+            <div style="text-align: right; width: 100%;">
+                <a href="#" target="_blank" class="btn" id="modalLink" data-i18n="visit-site">访问官网 →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- 多语言文本库（包含页面标题、关键词、描述） -----
+            const i18n = {
+                zh: {
+                    'page-title': 'NOCMT - 我的作品集',
+                    'page-keywords': 'NOCMT, 作品集, 设计师, 烽翎, Flare LaunchPad, SubFlowAI',
+                    'page-description': 'NOCMT - 我的作品集，展示我的设计作品和创意项目。',
+                    'theme-toggle-label': '切换主题模式',
+                    'theme-auto': '自动',
+                    'theme-light': '浅色',
+                    'theme-dark': '深色',
+                    'lang-toggle-label': '切换语言',
+                    'lang-zh': '中文',
+                    'lang-en': 'English',
+                    'pagination-label': '页面导航',
+                    'pagination-dot-label': '跳转到第 {number} 屏',
+                    'badge-home': '✦ 2026 作品集',
+                    'title-home': '打造有温度的<br />数字产品',
+                    'desc-home': '独立开发者 · AI产品经理 · 专注于优雅的交互与流畅的体验。下面是我近期的一些软件作品。',
+                    'btn-explore': '探索作品 ↓',
+                    'scroll-hint': '滚动探索',
+                    'badge-projects': '📦 精选项目',
+                    'title-projects': '我的作品',
+                    'desc-projects': '每一个项目都从解决真实问题出发，注重细节与品质。',
+                    'project1-name': 'SubFlowAI',
+                    'project1-tags': '实时字幕 · 效率工具 · AI驱动',
+                    'project1-desc': '一款由AI驱动的实时字幕生成工具，支持安卓、Windows、Mac平台，帮助用户在视频会议、直播等场景中快速生成字幕，自动录音带后对齐。',
+                    'project2-name': 'Flare LaunchPad',
+                    'project2-tags': '轻量 · 触发角 · 多显示器 · 自定义图标',
+                    'project2-desc': '一款Windows专属的桌面启动器，对齐macOS启动台的设计，支持多显示器布局、自定义图标、触发角等各种方式唤起，方便快速访问您喜爱的应用程序。',
+                    'badge-tech': '⚙️ 技术栈',
+                    'title-tech': '常用工具',
+                    'desc-tech': '灵活运用现代技术栈，快速构建可靠的产品。',
+                    'btn-more': '查看作品 →',
+                    'badge-contact': '👋 联系',
+                    'title-contact': '一起合作',
+                    'desc-contact': '如果你有有趣的想法，或者想聊聊设计、开发，欢迎随时联系。',
+                    'btn-github': 'GitHub',
+                    'btn-xiaohongshu': '小红书',
+                    'btn-email': 'Email',
+                    'visit-site': '访问官网 →'
+                },
+                en: {
+                    'page-title': 'NOCMT - My Portfolio',
+                    'page-keywords': 'NOCMT, portfolio, designer, Flare LaunchPad, SubFlowAI',
+                    'page-description': 'NOCMT - My portfolio, showcasing my design works and creative projects.',
+                    'theme-toggle-label': 'Switch theme mode',
+                    'theme-auto': 'Auto',
+                    'theme-light': 'Light',
+                    'theme-dark': 'Dark',
+                    'lang-toggle-label': 'Switch language',
+                    'lang-zh': '中文',
+                    'lang-en': 'English',
+                    'pagination-label': 'Page navigation',
+                    'pagination-dot-label': 'Jump to section {number}',
+                    'badge-home': '✦ 2026 Portfolio',
+                    'title-home': 'Crafting Digital<br />Products with Warmth',
+                    'desc-home': 'Independent Developer · AI Product Manager · Focused on elegant interactions and smooth experiences. Here are some of my recent software works.',
+                    'btn-explore': 'Explore Works ↓',
+                    'scroll-hint': 'Scroll to explore',
+                    'badge-projects': '📦 Featured Projects',
+                    'title-projects': 'My Works',
+                    'desc-projects': 'Every project starts with solving real problems, with attention to detail and quality.',
+                    'project1-name': 'SubFlowAI',
+                    'project1-tags': 'Real-time Subtitles · Efficiency Tool · AI-driven',
+                    'project1-desc': 'A real-time subtitle generation tool powered by AI, supporting Android, Windows, and Mac.',
+                    'project2-name': 'Flare LaunchPad',
+                    'project2-tags': 'Lightweight · Trigger Corner · Multi-monitor · Custom Icons',
+                    'project2-desc': 'A Windows launcher inspired by macOS Launchpad, with multi-monitor support and custom icons.',
+                    'badge-tech': '⚙️ Tech Stack',
+                    'title-tech': 'Tools I Use',
+                    'desc-tech': 'Leveraging modern tech stack to build reliable products quickly.',
+                    'btn-more': 'View Projects →',
+                    'badge-contact': '👋 Contact',
+                    'title-contact': 'Let\'s Collaborate',
+                    'desc-contact': 'If you have an interesting idea or want to chat about design & development, feel free to reach out.',
+                    'btn-github': 'GitHub',
+                    'btn-xiaohongshu': 'Xiaohongshu',
+                    'btn-email': 'Email',
+                    'visit-site': 'Visit Website →'
+                }
+            };
+
+            // ----- 项目数据 -----
+            const projectsData = [{
+                id: 'SubFlowAI',
+                nameKey: 'project1-name',
+                descKey: 'project1-desc',
+                tagsKey: 'project1-tags',
+                icon: 'https://subflowai.nocmt.com/logo.png',
+                media: 'https://subflowai.nocmt.com/%E6%88%AA%E5%9B%BE/%E6%A1%8C%E9%9D%A2-%E5%AE%9E%E6%97%B6%E8%BD%AC%E5%86%99-%E6%B7%B1%E8%89%B2.png',
+                url: 'https://subflowai.nocmt.com/'
+            }, {
+                id: 'Flare LaunchPad',
+                nameKey: 'project2-name',
+                descKey: 'project2-desc',
+                tagsKey: 'project2-tags',
+                icon: 'https://framerusercontent.com/images/RUQfaf5rkpCu653h7TkRDdLP344.png?width=180&height=180',
+                media: 'https://framerusercontent.com/images/3l4p7Wdjzvm3MNzmCt9JbrpgJ8.png?width=3840&height=2160',
+                url: 'https://apps.nocmt.com/flare/index.html'
+            }];
+
+            // ----- 状态 -----
+            let currentLang = 'zh';
+            let currentTheme = 'auto';
+            let activeIndex = 0;
+            const themeModes = ['auto', 'light', 'dark'];
+
+            // ----- DOM 引用 -----
+            const html = document.documentElement;
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeLabel = document.getElementById('themeLabel');
+            const langToggle = document.getElementById('langToggle');
+            const langIcon = document.getElementById('langIcon');
+            const langLabel = document.getElementById('langLabel');
+
+            const i18nElements = document.querySelectorAll('[data-i18n]');
+            const container = document.getElementById('scrollContainer');
+            const sections = document.querySelectorAll('.section');
+            const pagination = document.getElementById('pagination');
+            const total = sections.length;
+            const projectsGrid = document.getElementById('projectsGrid');
+
+            // 模态框元素
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalTags = document.getElementById('modalTags');
+            const modalLink = document.getElementById('modalLink');
+            const systemThemeQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+            // ----- 1. 生成导航点 -----
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'dot';
+                dot.dataset.index = i;
+                dot.setAttribute('aria-label', `跳转到第 ${i + 1} 屏`);
+                pagination.appendChild(dot);
+            }
+            const dots = pagination.querySelectorAll('.dot');
+
+            // ----- 2. 更新导航点激活状态 -----
+            function updatePagination(index) {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            function updateNavigationLabels() {
+                const label = i18n[currentLang]['pagination-label'] || '页面导航';
+                const dotLabel = i18n[currentLang]['pagination-dot-label'] || '跳转到第 {number} 屏';
+                pagination.setAttribute('aria-label', label);
+                dots.forEach((dot, i) => {
+                    dot.setAttribute('aria-label', dotLabel.replace('{number}', i + 1));
+                });
+            }
+
+            // ----- 3. 点击导航点跳转 -----
+            dots.forEach((dot) => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index, 10);
+                    const target = sections[index];
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // ----- 4. 使用 Intersection Observer 管理 section 可见性 -----
+            const observerOptions = {
+                threshold: [0.15, 0.3, 0.5, 0.7, 0.85],
+                root: container,
+                rootMargin: '0px 0px -10% 0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                const visibleMap = new Map();
+                let maxRatio = 0;
+                let maxIndex = 0;
+
+                entries.forEach(entry => {
+                    const index = parseInt(entry.target.dataset.index, 10);
+                    const ratio = entry.intersectionRatio;
+                    visibleMap.set(index, ratio);
+
+                    if (ratio > maxRatio) {
+                        maxRatio = ratio;
+                        maxIndex = index;
+                    }
+
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('exit');
+                        entry.target.classList.add('visible');
+                    } else {
+                        if (ratio === 0) {
+                            entry.target.classList.remove('visible');
+                            entry.target.classList.add('exit');
+                        }
+                    }
+                });
+
+                if (maxRatio > 0.15) {
+                    activeIndex = maxIndex;
+                    updatePagination(activeIndex);
+                }
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // ----- 5. 滚动停止后校准 -----
+            let scrollTimeout;
+            container.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const containerRect = container.getBoundingClientRect();
+                    const centerY = containerRect.top + containerRect.height / 2;
+                    let closestIndex = 0;
+                    let closestDist = Infinity;
+
+                    sections.forEach((section, idx) => {
+                        const rect = section.getBoundingClientRect();
+                        const sectionCenter = rect.top + rect.height / 2;
+                        const dist = Math.abs(centerY - sectionCenter);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closestIndex = idx;
+                        }
+                    });
+
+                    if (closestIndex !== activeIndex) {
+                        activeIndex = closestIndex;
+                        updatePagination(activeIndex);
+                    }
+                }, 120);
+            });
+
+            // ----- 6. 入场动画 -----
+            function initialEntrance() {
+                sections.forEach((section) => {
+                    section.classList.remove('visible', 'exit');
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(30px) scale(0.97)';
+                    section.style.transition = 'none';
+                });
+
+                void document.body.offsetHeight;
+
+                sections.forEach((section) => {
+                    section.style.transition = '';
+                });
+
+                sections.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.style.opacity = '';
+                        section.style.transform = '';
+                        section.classList.add('visible');
+                        section.classList.remove('exit');
+                    }, 180 * (index + 1));
+                });
+
+                setTimeout(() => {
+                    activeIndex = 0;
+                    updatePagination(0);
+                }, 180 * total + 200);
+            }
+
+            requestAnimationFrame(() => {
+                initialEntrance();
+            });
+
+            // ----- 7. 窗口大小变化校准 -----
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    sectionObserver.disconnect();
+                    sections.forEach(section => {
+                        sectionObserver.observe(section);
+                    });
+                }, 200);
+            });
+
+            // ----- 8. 渲染作品卡片 -----
+            function renderProjects() {
+                projectsGrid.innerHTML = '';
+                projectsData.forEach((project, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.dataset.index = index;
+                    card.innerHTML = `
+                        <div class="emoji">
+                            <img src="${project.icon}" alt="${i18n[currentLang][project.nameKey]}" style="width: 2rem; height: 2rem; border-radius: 8px;" />
+                        </div>
+                        <h3 data-i18n="${project.nameKey}">${i18n[currentLang][project.nameKey]}</h3>
+                        <p class="tags" data-i18n="${project.tagsKey}">${i18n[currentLang][project.tagsKey]}</p>
+                        <p data-i18n="${project.descKey}">${i18n[currentLang][project.descKey]}</p>
+                    `;
+                    card.addEventListener('click', function() {
+                        openModal(index);
+                    });
+                    projectsGrid.appendChild(card);
+                });
+            }
+
+            // ----- 9. 模态框逻辑 -----
+            function openModal(index) {
+                const project = projectsData[index];
+                const name = i18n[currentLang][project.nameKey] || '项目';
+                const desc = i18n[currentLang][project.descKey] || '描述';
+                const tags = i18n[currentLang][project.tagsKey] || '标签';
+                const visitText = i18n[currentLang]['visit-site'] || '访问官网 →';
+
+                modalImage.src = project.media;
+                modalImage.alt = name;
+                modalTitle.textContent = name;
+                modalDesc.textContent = desc;
+                modalTags.textContent = tags;
+                modalLink.textContent = visitText;
+                modalLink.href = project.url;
+
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // ----- 10. 偏好设置与初始化 -----
+            function savePreference(key, value, moduleName) {
+                try {
+                    localStorage.setItem(key, value);
+                    console.debug(`【${moduleName}】偏好保存成功：key=${key}, value=${value}`);
+                } catch (error) {
+                    console.debug(`【${moduleName}】偏好保存失败：key=${key}, reason=${error.message}`);
+                }
+            }
+
+            function readPreference(key, allowedValues) {
+                try {
+                    const value = localStorage.getItem(key);
+                    if (allowedValues.includes(value)) {
+                        return value;
+                    }
+                    if (value) {
+                        console.debug(`【偏好设置】忽略未知偏好：key=${key}, value=${value}`);
+                    }
+                } catch (error) {
+                    console.debug(`【偏好设置】偏好读取失败：key=${key}, reason=${error.message}`);
+                }
+                return null;
+            }
+
+            function detectBrowserLanguage() {
+                const browserLanguages = Array.from(
+                    navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]
+                ).filter(Boolean);
+                const matchedLang = browserLanguages.some(lang => lang.toLowerCase().startsWith('zh')) ? 'zh' : 'en';
+                console.debug(`【语言设置】浏览器语言检测完成：languages=${browserLanguages.join(',') || 'unknown'}, matched=${matchedLang}`);
+                return matchedLang;
+            }
+
+            function getInitialLanguage() {
+                const savedLang = readPreference('preferredLang', Object.keys(i18n));
+                if (savedLang) {
+                    console.debug(`【语言设置】使用已保存语言：lang=${savedLang}`);
+                    return { lang: savedLang, source: 'saved' };
+                }
+                return { lang: detectBrowserLanguage(), source: 'browser' };
+            }
+
+            function getSystemThemeInfo() {
+                const mediaPrefersDark = Boolean(systemThemeQuery && systemThemeQuery.matches);
+                const hour = new Date().getHours();
+                const isNightFallback = hour >= 18 || hour < 6;
+                const theme = mediaPrefersDark || isNightFallback ? 'dark' : 'light';
+                const source = mediaPrefersDark ? 'media-query' : isNightFallback ? 'night-fallback' : 'media-query';
+
+                return { theme, source, mediaPrefersDark, hour };
+            }
+
+            function getSystemTheme() {
+                return getSystemThemeInfo().theme;
+            }
+
+            function getResolvedTheme(theme) {
+                return theme === 'auto' ? getSystemTheme() : theme;
+            }
+
+            function getInitialTheme() {
+                const savedTheme = readPreference('preferredTheme', themeModes);
+                if (savedTheme) {
+                    console.debug(`【主题设置】使用已保存主题：mode=${savedTheme}`);
+                    return { theme: savedTheme, source: 'saved' };
+                }
+                const systemThemeInfo = getSystemThemeInfo();
+                console.debug(`【主题设置】未发现已保存主题，启用自动模式：system=${systemThemeInfo.theme}, source=${systemThemeInfo.source}, hour=${systemThemeInfo.hour}, mediaPrefersDark=${systemThemeInfo.mediaPrefersDark}`);
+                return { theme: 'auto', source: 'default' };
+            }
+
+            function updateThemeToggle() {
+                const label = i18n[currentLang][`theme-${currentTheme}`] || currentTheme;
+                const toggleLabel = i18n[currentLang]['theme-toggle-label'] || '切换主题模式';
+                const icons = {
+                    auto: '◐',
+                    light: '☀️',
+                    dark: '🌙'
+                };
+
+                themeIcon.textContent = icons[currentTheme] || icons.auto;
+                themeLabel.textContent = label;
+                themeToggle.setAttribute('aria-label', `${toggleLabel}：${label}`);
+                themeToggle.title = `${toggleLabel}: ${label}`;
+            }
+
+            function updateThemeMeta(resolvedTheme) {
+                if (!themeMeta) {
+                    return;
+                }
+                themeMeta.content = resolvedTheme === 'dark' ? '#0b0b0b' : '#f8f6f2';
+            }
+
+            // ----- 11. 语言切换（更新页面标题、关键词、描述） -----
+            function setLanguage(lang, options = {}) {
+                const normalizedLang = i18n[lang] ? lang : 'en';
+                const shouldPersist = options.persist === true;
+                currentLang = normalizedLang;
+
+                // 更新所有 data-i18n 元素
+                i18nElements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (i18n[normalizedLang] && i18n[normalizedLang][key] !== undefined) {
+                        el.innerHTML = i18n[normalizedLang][key];
+                    }
+                });
+
+                // 更新页面标题、关键词、描述
+                document.title = i18n[normalizedLang]['page-title'] || 'NOCMT - 作品集';
+                const keywordsMeta = document.querySelector('meta[name="keywords"]');
+                if (keywordsMeta) {
+                    keywordsMeta.content = i18n[normalizedLang]['page-keywords'] || '';
+                }
+                const descMeta = document.querySelector('meta[name="description"]');
+                if (descMeta) {
+                    descMeta.content = i18n[normalizedLang]['page-description'] || '';
+                }
+
+                // 更新按钮文字
+                langLabel.textContent = normalizedLang === 'zh' ? i18n[normalizedLang]['lang-zh'] : i18n[normalizedLang]['lang-en'];
+                langIcon.textContent = normalizedLang === 'zh' ? '🇨🇳' : '🇬🇧';
+                langToggle.setAttribute('aria-label', i18n[normalizedLang]['lang-toggle-label'] || '切换语言');
+                html.lang = normalizedLang === 'zh' ? 'zh-CN' : 'en';
+                updateNavigationLabels();
+                updateThemeToggle();
+
+                // 重新渲染卡片
+                renderProjects();
+
+                if (shouldPersist) {
+                    savePreference('preferredLang', normalizedLang, '语言设置');
+                }
+                console.debug(`【语言设置】应用语言完成：lang=${normalizedLang}, source=${options.source || 'manual'}, persisted=${shouldPersist}`);
+            }
+
+            // ----- 12. 主题切换 -----
+            function applyResolvedTheme(themeMode, resolvedTheme, resolvedSource) {
+                html.setAttribute('data-theme-mode', themeMode);
+                html.setAttribute('data-theme', resolvedTheme);
+                html.setAttribute('data-theme-source', resolvedSource);
+            }
+
+            function setTheme(theme, options = {}) {
+                const normalizedTheme = themeModes.includes(theme) ? theme : 'auto';
+                const shouldPersist = options.persist === true;
+                const systemThemeInfo = getSystemThemeInfo();
+                const resolvedTheme = normalizedTheme === 'auto' ? systemThemeInfo.theme : normalizedTheme;
+                const resolvedSource = normalizedTheme === 'auto' ? systemThemeInfo.source : 'manual';
+                currentTheme = normalizedTheme;
+
+                applyResolvedTheme(normalizedTheme, resolvedTheme, resolvedSource);
+                updateThemeMeta(resolvedTheme);
+                updateThemeToggle();
+
+                if (shouldPersist) {
+                    savePreference('preferredTheme', normalizedTheme, '主题设置');
+                }
+                console.debug(`【主题设置】应用主题完成：mode=${normalizedTheme}, resolved=${resolvedTheme}, resolvedSource=${resolvedSource}, system=${systemThemeInfo.theme}, mediaPrefersDark=${systemThemeInfo.mediaPrefersDark}, hour=${systemThemeInfo.hour}, source=${options.source || 'manual'}, persisted=${shouldPersist}`);
+            }
+
+            // ----- 13. 切换事件绑定 -----
+            langToggle.addEventListener('click', function() {
+                const nextLang = currentLang === 'zh' ? 'en' : 'zh';
+                setLanguage(nextLang, { persist: true, source: 'manual-click' });
+            });
+
+            themeToggle.addEventListener('click', function() {
+                const nextIndex = (themeModes.indexOf(currentTheme) + 1) % themeModes.length;
+                setTheme(themeModes[nextIndex], { persist: true, source: 'manual-click' });
+            });
+
+            if (systemThemeQuery) {
+                const handleSystemThemeChange = (event) => {
+                    if (currentTheme === 'auto') {
+                        console.debug(`【主题设置】系统主题变化：system=${event.matches ? 'dark' : 'light'}, mode=${currentTheme}`);
+                        setTheme('auto', { persist: false, source: 'system-change' });
+                    }
+                };
+
+                if (systemThemeQuery.addEventListener) {
+                    systemThemeQuery.addEventListener('change', handleSystemThemeChange);
+                } else if (systemThemeQuery.addListener) {
+                    systemThemeQuery.addListener(handleSystemThemeChange);
+                }
+            }
+
+            // ----- 14. 初始化 -----
+            const initialLanguage = getInitialLanguage();
+            const initialTheme = getInitialTheme();
+
+            // 初始化语言（会更新标题、关键词、描述和所有文本）
+            setLanguage(initialLanguage.lang, { persist: false, source: initialLanguage.source });
+            setTheme(initialTheme.theme, { persist: false, source: initialTheme.source });
+
+            window.addEventListener('load', function() {
+                console.debug(`【页面初始化】资源加载完成：lang=${currentLang}, theme=${currentTheme}, resolvedTheme=${getResolvedTheme(currentTheme)}`);
+            });
+
+        })();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFFRF6WK7B"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZFFRF6WK7B');
+    </script>
+</body>
+
+</html>

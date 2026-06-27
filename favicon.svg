@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NOCMT">
+    <style>
+        .tile { fill: #141414; }
+        .ring { fill: none; stroke: #f8f6f2; stroke-width: 3.2; opacity: 0.9; }
+        .mark { fill: #f8f6f2; }
+        .spark { fill: #ffcc66; }
+        @media (prefers-color-scheme: dark) {
+            .tile { fill: #f8f6f2; }
+            .ring { stroke: #141414; }
+            .mark { fill: #141414; }
+            .spark { fill: #d8892b; }
+        }
+    </style>
+    <rect class="tile" x="4" y="4" width="56" height="56" rx="16" />
+    <path class="ring" d="M18 45V19l28 26V19" />
+    <path class="mark" d="M23 41V27l18 18h-7.2L23 34.2V41z" />
+    <circle class="spark" cx="46" cy="18" r="4" />
+</svg>
