@@ -7,7 +7,7 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f8f6f2" />
     <title>NOCMT - 我的作品集</title>
-    <meta name="keywords" content="NOCMT, 作品集, 设计师，烽翎，Flare LaunchPad,SubFlowAI" />
+    <meta name="keywords" content="NOCMT, 作品集, AI新译, Wepak, 烽翎, DualView, Align, ToMic, VideoWithCase, XPort Manager, Flare LaunchPad, SubFlowAI" />
     <meta name="description" content="NOCMT - 我的作品集，展示我的设计作品和创意项目。" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -249,6 +249,91 @@
             transform: translateY(-20px) scale(0.97);
         }
 
+        #section-0 {
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        #section-0::before,
+        #section-0::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #section-0::before {
+            background:
+                radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.32) 20%, rgba(255, 255, 255, 0) 46%),
+                linear-gradient(150deg, rgba(255, 255, 255, 0.72), rgba(248, 246, 242, 0.15) 46%, rgba(236, 232, 224, 0.5)),
+                repeating-linear-gradient(90deg, rgba(26, 26, 26, 0.018) 0 1px, transparent 1px 84px);
+            opacity: 0.86;
+        }
+
+        #section-0::after {
+            background:
+                radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.46), transparent 32%),
+                linear-gradient(115deg, transparent 12%, rgba(255, 255, 255, 0.86) 36%, rgba(255, 255, 255, 0.28) 50%, transparent 72%);
+            opacity: 0.68;
+            transform: translateX(-28%) skewX(-8deg);
+            animation: homeLightSweep 9s ease-in-out infinite;
+        }
+
+        #section-0 .content,
+        #section-0 .scroll-hint {
+            position: relative;
+            z-index: 1;
+        }
+
+        [data-theme="dark"] #section-0::before {
+            background:
+                radial-gradient(ellipse at 50% 35%, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.12) 22%, rgba(255, 255, 255, 0) 54%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 55%),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 96px);
+            opacity: 1;
+            transform-origin: center top;
+            animation: homeSpotlightDrift 10s ease-in-out infinite alternate;
+        }
+
+        [data-theme="dark"] #section-0::after {
+            background:
+                radial-gradient(circle at 50% 35%, rgba(120, 170, 255, 0.12), transparent 28%),
+                linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.08) 38%, rgba(255, 255, 255, 0.02) 48%, transparent 72%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.26));
+            opacity: 0.8;
+        }
+
+        @keyframes homeSpotlightDrift {
+            0% {
+                transform: translate3d(-3%, -2%, 0) scale(1);
+            }
+
+            100% {
+                transform: translate3d(3%, 1%, 0) scale(1.08);
+            }
+        }
+
+        @keyframes homeLightSweep {
+            0%,
+            100% {
+                transform: translateX(-34%) skewX(-8deg);
+                opacity: 0.36;
+            }
+
+            50% {
+                transform: translateX(34%) skewX(-8deg);
+                opacity: 0.78;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #section-0::before,
+            #section-0::after {
+                animation: none;
+            }
+        }
+
         /* ----- 内容样式 ----- */
         .content {
             max-width: 800px;
@@ -360,22 +445,25 @@
         /* 作品卡片 */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: 1.35rem;
             width: 100%;
-            max-width: 720px;
-            margin: 1.5rem auto 0;
+            max-width: 1120px;
+            margin: 2.4rem auto 0;
         }
 
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 1.8rem 1.2rem;
+            padding: 1.55rem 1.35rem;
             text-align: left;
             transition: background 0.3s ease, transform 0.3s ease, border 0.3s ease;
             backdrop-filter: blur(4px);
             cursor: pointer;
+            min-height: 236px;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -385,7 +473,7 @@
 
         .project-card .emoji {
             font-size: 2rem;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .project-card h3 {
@@ -398,9 +486,10 @@
         .project-card .tags {
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.75rem;
             opacity: 0.7;
             letter-spacing: 0.02em;
+            line-height: 1.45;
         }
 
         .project-card p {
@@ -408,7 +497,27 @@
             color: var(--text-muted);
             margin: 0;
             max-width: 100%;
+            line-height: 1.55;
             transition: color 0.4s ease;
+        }
+
+        .project-card p:not(.tags) {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        #section-1 {
+            height: auto;
+            min-height: 100vh;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        #section-1 .content {
+            max-width: 1160px;
+            padding: 1rem 0;
         }
 
         /* 页码指示器 */
@@ -486,7 +595,7 @@
             align-items: center;
             padding: 1.5rem;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.26s ease;
         }
 
         .modal-overlay.active {
@@ -497,20 +606,25 @@
         .modal-content {
             background: var(--modal-bg);
             border-radius: 24px;
-            max-width: 640px;
+            max-width: 760px;
             width: 100%;
             padding: 2rem;
             position: relative;
+            max-height: calc(100vh - 3rem);
+            overflow-y: auto;
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
             border: 1px solid var(--modal-border);
-            transform: scale(0.95) translateY(20px);
+            opacity: 0;
+            transform: scale(0.96) translateY(24px);
             transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease;
             color: var(--modal-text);
             text-align: left;
         }
 
         .modal-overlay.active .modal-content {
+            opacity: 1;
             transform: scale(1) translateY(0);
+            animation: modalContentEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         .modal-close {
@@ -536,19 +650,94 @@
             width: 100%;
             border-radius: 16px;
             margin-bottom: 1.2rem;
-            background: var(--bg-primary);
+            background: linear-gradient(135deg, #f8fbff 0%, #e7eefc 34%, #f5eafd 67%, #fff4e6 100%);
+            padding: clamp(10px, 2vw, 18px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04), 0 14px 36px rgba(0, 0, 0, 0.12);
             aspect-ratio: 16 / 9;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
+            transform-origin: center top;
+        }
+
+        .modal-overlay.active .modal-media {
+            animation: modalMediaEnter 0.46s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         .modal-media img,
         .modal-media video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            border-radius: 10px;
+            background: transparent;
+            display: block;
+        }
+
+        .modal-carousel[hidden] {
+            display: none;
+        }
+
+        .modal-carousel {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: clamp(14px, 2.5vw, 24px);
+        }
+
+        .modal-carousel button {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            background: rgba(10, 10, 10, 0.38);
+            color: #ffffff;
+            cursor: pointer;
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            line-height: 1;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .modal-carousel button:hover {
+            background: rgba(10, 10, 10, 0.55);
+            transform: scale(1.06);
+        }
+
+        .modal-carousel-dots {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(16px, 2.5vw, 24px);
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.45rem;
+            pointer-events: auto;
+        }
+
+        .modal-carousel-dots button {
+            width: 0.48rem;
+            height: 0.48rem;
+            padding: 0;
+            border-radius: 999px;
+            border: none;
+            background: rgba(255, 255, 255, 0.55);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+        }
+
+        .modal-carousel-dots button.active {
+            background: #ffffff;
+            transform: scale(1.25);
         }
 
         .modal-content h2 {
@@ -590,6 +779,39 @@
             opacity: 0.9;
         }
 
+        @keyframes modalContentEnter {
+            0% {
+                opacity: 0;
+                transform: scale(0.96) translateY(24px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes modalMediaEnter {
+            0% {
+                opacity: 0;
+                transform: translateY(12px) scale(0.985);
+                filter: saturate(0.9) blur(2px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: saturate(1) blur(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .modal-overlay.active .modal-content,
+            .modal-overlay.active .modal-media {
+                animation: none;
+            }
+        }
+
         @media (max-width: 640px) {
             .modal-content {
                 padding: 1.2rem;
@@ -611,12 +833,13 @@
             }
 
             .projects-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.8rem;
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .project-card {
-                padding: 1.2rem 0.8rem;
+                min-height: auto;
+                padding: 1.25rem 1rem;
             }
 
             .pagination {
@@ -749,6 +972,11 @@
         <div class="modal-content">
             <div class="modal-media" id="modalMedia">
                 <img src="" alt="作品展示" id="modalImage" />
+                <div class="modal-carousel" id="modalCarousel" hidden>
+                    <button type="button" id="modalPrev" aria-label="上一张">‹</button>
+                    <div class="modal-carousel-dots" id="modalCarouselDots" aria-label="预览图导航"></div>
+                    <button type="button" id="modalNext" aria-label="下一张">›</button>
+                </div>
             </div>
             <h2 id="modalTitle">项目名称</h2>
             <p class="tags" id="modalTags">项目标签</p>
@@ -767,7 +995,7 @@
             const i18n = {
                 zh: {
                     'page-title': 'NOCMT - 我的作品集',
-                    'page-keywords': 'NOCMT, 作品集, 设计师, 烽翎, Flare LaunchPad, SubFlowAI',
+                    'page-keywords': 'NOCMT, 作品集, AI新译, Wepak, 烽翎, DualView, Align, ToMic, VideoWithCase, XPort Manager, Flare LaunchPad, SubFlowAI',
                     'page-description': 'NOCMT - 我的作品集，展示我的设计作品和创意项目。',
                     'theme-toggle-label': '切换主题模式',
                     'theme-auto': '自动',
@@ -792,6 +1020,30 @@
                     'project2-name': 'Flare LaunchPad',
                     'project2-tags': '轻量 · 触发角 · 多显示器 · 自定义图标',
                     'project2-desc': '一款Windows专属的桌面启动器，对齐macOS启动台的设计，支持多显示器布局、自定义图标、触发角等各种方式唤起，方便快速访问您喜爱的应用程序。',
+                    'project3-name': 'AI新译',
+                    'project3-tags': '音视频转录 · AI翻译 · 批量处理',
+                    'project3-desc': '支持将音视频内容在线转成原文+译文字幕。覆盖转录、翻译、字幕译对和导出四类核心场景，支持SRT/ASS/VTT/SBV多格式导出。',
+                    'project4-name': 'Wepak',
+                    'project4-tags': 'WebDAV · 文件清理 · 高效管理',
+                    'project4-desc': '通过WebDAV快速预览目录中的视频和图片文件，上划即可删除，帮助用户高效完成文件清理。轻量低价，即买即用。',
+                    'project5-name': 'Fengling (烽翎)',
+                    'project5-tags': '剪贴板同步 · 跨平台 · 后台运行',
+                    'project5-desc': '可能是唯一后台运行的跨系统跨平台同步剪贴板与管理PC文件的工具。支持Windows和macOS、安卓、iOS，剪贴板内容自动后台同步。',
+                    'project6-name': 'DualView',
+                    'project6-tags': '图片对比 · 双屏同步 · Figma级交互',
+                    'project6-desc': '高性能双屏图片对比工具，专为macOS打造。支持Figma级丝滑缩放与平移、双屏像素级同步滚动、以光标为中心的精准缩放。',
+                    'project7-name': 'Align',
+                    'project7-tags': '任务管理 · AI辅助 · 健康提醒',
+                    'project7-desc': '精简而强大的个人任务管理工具。融合AI自然语言输入、多维度视图（日/周/列表/看板）和健康生活提醒，支持一键部署到Vercel。',
+                    'project8-name': 'ToMic',
+                    'project8-tags': '手机变麦克风 · 局域网 · 零安装',
+                    'project8-desc': '把手机浏览器变成PC麦克风。通过Wi-Fi传输音频，利用虚拟声卡注入系统输入，无需手机安装任何App。59 ⭐ GitHub。',
+                    'project9-name': 'VideoWithCase',
+                    'project9-tags': '视频带壳 · 产品演示 · 社媒封面',
+                    'project9-desc': '本地运行的网页工具，把视频快速放进设备外壳中展示。支持手机/平板/笔记本/显示器四类设备壳、多平台尺寸预设和渐变背景。',
+                    'project10-name': 'XPort Manager',
+                    'project10-tags': 'VS Code插件 · 端口管理 · 进程管理',
+                    'project10-desc': 'Visual Studio Code 端口管理插件。支持查看TCP/UDP端口、进程名称和PID，可右键停止进程，支持搜索过滤。233次下载。',
                     'badge-tech': '⚙️ 技术栈',
                     'title-tech': '常用工具',
                     'desc-tech': '灵活运用现代技术栈，快速构建可靠的产品。',
@@ -802,11 +1054,11 @@
                     'btn-github': 'GitHub',
                     'btn-xiaohongshu': '小红书',
                     'btn-email': 'Email',
-                    'visit-site': '访问官网 →'
+                    'visit-site': '查看项目 →'
                 },
                 en: {
                     'page-title': 'NOCMT - My Portfolio',
-                    'page-keywords': 'NOCMT, portfolio, designer, Flare LaunchPad, SubFlowAI',
+                    'page-keywords': 'NOCMT, portfolio, AI Xinyi, Wepak, Fengling, DualView, Align, ToMic, VideoWithCase, XPort Manager, Flare LaunchPad, SubFlowAI',
                     'page-description': 'NOCMT - My portfolio, showcasing my design works and creative projects.',
                     'theme-toggle-label': 'Switch theme mode',
                     'theme-auto': 'Auto',
@@ -831,6 +1083,30 @@
                     'project2-name': 'Flare LaunchPad',
                     'project2-tags': 'Lightweight · Trigger Corner · Multi-monitor · Custom Icons',
                     'project2-desc': 'A Windows launcher inspired by macOS Launchpad, with multi-monitor support and custom icons.',
+                    'project3-name': 'AI Xinyi',
+                    'project3-tags': 'Audio/Video Transcription · AI Translation · Batch Processing',
+                    'project3-desc': 'Turns audio and video content into original-language and translated subtitles online. Covers transcription, translation, subtitle pairing, and export, with SRT/ASS/VTT/SBV output.',
+                    'project4-name': 'Wepak',
+                    'project4-tags': 'WebDAV · File Cleanup · Efficient Management',
+                    'project4-desc': 'Quickly previews video and image files in WebDAV directories; swipe up to delete and clean files efficiently. Lightweight, affordable, and ready to use.',
+                    'project5-name': 'Fengling',
+                    'project5-tags': 'Clipboard Sync · Cross-platform · Background Sync',
+                    'project5-desc': 'Possibly the only background-running tool for cross-system clipboard sync and PC file management. Supports Windows, macOS, Android, and iOS, with clipboard content synced automatically in the background.',
+                    'project6-name': 'DualView',
+                    'project6-tags': 'Image Comparison · Dual-screen Sync · Figma-level Interaction',
+                    'project6-desc': 'A high-performance dual-screen image comparison tool built for macOS, with Figma-smooth zooming and panning, pixel-level synchronized scrolling, and precise cursor-centered zoom.',
+                    'project7-name': 'Align',
+                    'project7-tags': 'Task Management · AI-assisted · Wellness Reminders',
+                    'project7-desc': 'A focused yet powerful personal task manager combining AI natural-language input, multiple views (day/week/list/kanban), wellness reminders, and one-click deployment to Vercel.',
+                    'project8-name': 'ToMic',
+                    'project8-tags': 'Phone as Microphone · LAN · No App Install',
+                    'project8-desc': 'Turns a phone browser into a PC microphone. Audio streams over Wi-Fi and is injected into the system input through a virtual sound card, with no mobile app required. 59 GitHub stars.',
+                    'project9-name': 'VideoWithCase',
+                    'project9-tags': 'Video Mockups · Product Demos · Social Covers',
+                    'project9-desc': 'A local web tool that quickly places videos inside device frames. Supports phone, tablet, laptop, and monitor frames, multi-platform size presets, and gradient backgrounds.',
+                    'project10-name': 'XPort Manager',
+                    'project10-tags': 'VS Code Extension · Port Management · Process Management',
+                    'project10-desc': 'A Visual Studio Code extension for port management. View TCP/UDP ports, process names, and PIDs, stop processes from the context menu, and filter by search. 233 downloads.',
                     'badge-tech': '⚙️ Tech Stack',
                     'title-tech': 'Tools I Use',
                     'desc-tech': 'Leveraging modern tech stack to build reliable products quickly.',
@@ -860,8 +1136,72 @@
                 descKey: 'project2-desc',
                 tagsKey: 'project2-tags',
                 icon: 'https://framerusercontent.com/images/RUQfaf5rkpCu653h7TkRDdLP344.png?width=180&height=180',
-                media: 'https://framerusercontent.com/images/3l4p7Wdjzvm3MNzmCt9JbrpgJ8.png?width=3840&height=2160',
+                media: ['https://framerusercontent.com/images/3l4p7Wdjzvm3MNzmCt9JbrpgJ8.png?width=3840&height=2160','./assets/flare.png'],
                 url: 'https://apps.nocmt.com/flare/index.html'
+            }, {
+                id: 'AI新译',
+                nameKey: 'project3-name',
+                descKey: 'project3-desc',
+                tagsKey: 'project3-tags',
+                icon: './assets/miman_icon.png',
+                media: './assets/miman.png',
+                url: 'https://apps.nocmt.com/miman/index.html'
+            }, {
+                id: 'Wepak',
+                nameKey: 'project4-name',
+                descKey: 'project4-desc',
+                tagsKey: 'project4-tags',
+                icon: './assets/wepak_icon.png',
+                media: './assets/wepak.jpg',
+                url: 'http://xhslink.com/o/4YRDUaZGMjs'
+            }, {
+                id: 'Fengling',
+                nameKey: 'project5-name',
+                descKey: 'project5-desc',
+                tagsKey: 'project5-tags',
+                icon: './assets/fengling_icon.png',
+                media: './assets/fengling.png',
+                url: 'https://github.com/nocmt/fengling_publish'
+            }, {
+                id: 'DualView',
+                nameKey: 'project6-name',
+                descKey: 'project6-desc',
+                tagsKey: 'project6-tags',
+                icon: './assets/dualview_icon.png',
+                media: './assets/dualview.png',
+                url: 'https://github.com/nocmt/dualview'
+            }, {
+                id: 'Align',
+                nameKey: 'project7-name',
+                descKey: 'project7-desc',
+                tagsKey: 'project7-tags',
+                icon: './assets/align_icon.png',
+                media: './assets/align.gif',
+                url: 'https://github.com/nocmt/align'
+            }, {
+                id: 'ToMic',
+                nameKey: 'project8-name',
+                descKey: 'project8-desc',
+                tagsKey: 'project8-tags',
+                icon: './favicon.svg',
+                media: './assets/toMic.png',
+                url: 'https://github.com/nocmt/toMic'
+            }, {
+                id: 'VideoWithCase',
+                nameKey: 'project9-name',
+                descKey: 'project9-desc',
+                tagsKey: 'project9-tags',
+                icon: './favicon.svg',
+                media: './assets/videoWithCase.png',
+                url: 'https://github.com/nocmt/videoWithCase'
+            }, {
+                id: 'XPort Manager',
+                nameKey: 'project10-name',
+                descKey: 'project10-desc',
+                tagsKey: 'project10-tags',
+                icon: './assets/xport_icon.png',
+                media: './assets/xport.png',
+                url: 'https://marketplace.visualstudio.com/items?itemName=nocmt.xport-manager'
             }];
 
             // ----- 状态 -----
@@ -890,11 +1230,18 @@
             // 模态框元素
             const modalOverlay = document.getElementById('modalOverlay');
             const modalImage = document.getElementById('modalImage');
+            const modalCarousel = document.getElementById('modalCarousel');
+            const modalCarouselDots = document.getElementById('modalCarouselDots');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
             const modalTitle = document.getElementById('modalTitle');
             const modalDesc = document.getElementById('modalDesc');
             const modalTags = document.getElementById('modalTags');
             const modalLink = document.getElementById('modalLink');
             const systemThemeQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+            let currentModalMediaItems = [];
+            let currentModalMediaIndex = 0;
+            let currentModalMediaAlt = '';
 
             // ----- 1. 生成导航点 -----
             for (let i = 0; i < total; i++) {
@@ -1069,18 +1416,62 @@
                     });
                     projectsGrid.appendChild(card);
                 });
+                console.debug(`【项目卡片】渲染完成：count=${projectsData.length}, lang=${currentLang}`);
             }
 
             // ----- 9. 模态框逻辑 -----
+            function getProjectMediaItems(project) {
+                const media = Array.isArray(project.media) ? project.media : [project.media];
+                return media.filter(Boolean);
+            }
+
+            function showModalMedia(index) {
+                if (!currentModalMediaItems.length) {
+                    return;
+                }
+
+                currentModalMediaIndex = (index + currentModalMediaItems.length) % currentModalMediaItems.length;
+                modalImage.src = currentModalMediaItems[currentModalMediaIndex];
+                modalImage.alt = currentModalMediaAlt;
+                modalCarouselDots.querySelectorAll('button').forEach((dot, dotIndex) => {
+                    dot.classList.toggle('active', dotIndex === currentModalMediaIndex);
+                    dot.setAttribute('aria-current', dotIndex === currentModalMediaIndex ? 'true' : 'false');
+                });
+                console.debug(`【项目预览】切换预览图：index=${currentModalMediaIndex + 1}, total=${currentModalMediaItems.length}`);
+            }
+
+            function renderModalCarousel(mediaItems) {
+                modalCarousel.hidden = mediaItems.length <= 1;
+                modalCarouselDots.innerHTML = '';
+
+                if (mediaItems.length <= 1) {
+                    console.debug(`【项目预览】使用单图模式：total=${mediaItems.length}`);
+                    return;
+                }
+
+                mediaItems.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.setAttribute('aria-label', `切换到第 ${index + 1} 张预览图`);
+                    dot.addEventListener('click', () => showModalMedia(index));
+                    modalCarouselDots.appendChild(dot);
+                });
+                console.debug(`【项目预览】轮播控件渲染完成：total=${mediaItems.length}`);
+            }
+
             function openModal(index) {
                 const project = projectsData[index];
                 const name = i18n[currentLang][project.nameKey] || '项目';
                 const desc = i18n[currentLang][project.descKey] || '描述';
                 const tags = i18n[currentLang][project.tagsKey] || '标签';
                 const visitText = i18n[currentLang]['visit-site'] || '访问官网 →';
+                const mediaItems = getProjectMediaItems(project);
 
-                modalImage.src = project.media;
-                modalImage.alt = name;
+                currentModalMediaItems = mediaItems;
+                currentModalMediaIndex = 0;
+                currentModalMediaAlt = name;
+                renderModalCarousel(mediaItems);
+                showModalMedia(0);
                 modalTitle.textContent = name;
                 modalDesc.textContent = desc;
                 modalTags.textContent = tags;
@@ -1090,6 +1481,14 @@
                 modalOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
+
+            modalPrev.addEventListener('click', function() {
+                showModalMedia(currentModalMediaIndex - 1);
+            });
+
+            modalNext.addEventListener('click', function() {
+                showModalMedia(currentModalMediaIndex + 1);
+            });
 
             function closeModal() {
                 modalOverlay.classList.remove('active');
