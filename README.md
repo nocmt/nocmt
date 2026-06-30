@@ -1,6 +1,6 @@
 ### Hi there 👋 I'm nocmt
 
-独立开发者 · AI 产品经理 · 专注于优雅交互与流畅体验
+独立开发者 · 产品经理 · 专注于优雅交互与流畅体验
 
 > 打造有温度的数字产品 — Building tools with warmth.
 
