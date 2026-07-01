@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const maintenanceNotice = JSON.parse(readFileSync(new URL('../maintenance-notice.json', import.meta.url), 'utf8'));
 
 const expectedProjects = [
   {
@@ -102,7 +103,7 @@ for (const project of expectedProjects) {
 const projectDataNames = html.match(/nameKey: 'project\d+-name'/g) || [];
 assert.equal(projectDataNames.length, 10, 'projectsData should contain ten project cards');
 
-assert.ok(html.includes('#section-1 {\n            height: auto;'), 'projects section should expand naturally');
+assert.match(html, /#section-1\s*\{[^}]*height:\s*auto;/s, 'projects section should expand naturally');
 assert.ok(html.includes('min-height: 100vh;'), 'projects section should keep at least one viewport of height');
 assert.doesNotMatch(
   html,
@@ -175,14 +176,114 @@ assert.ok(html.includes('let modalCarouselTimer = null;'), 'modal carousel shoul
 assert.ok(html.includes('function stopModalCarouselTimer()'), 'modal carousel should expose timer cleanup');
 assert.ok(html.includes('clearInterval(modalCarouselTimer);'), 'modal carousel should clear its timer on cleanup');
 assert.ok(html.includes('function startModalCarouselTimer(mediaItems)'), 'modal carousel should auto-play multi-image previews');
-assert.ok(html.includes('stopModalCarouselTimer();\n                if (mediaItems.length <= 1)'), 'modal carousel should stop old timers before deciding whether to autoplay');
+assert.match(html, /stopModalCarouselTimer\(\);\s*if \(mediaItems\.length <= 1\)/, 'modal carousel should stop old timers before deciding whether to autoplay');
 assert.ok(html.includes('modalCarouselTimer = setInterval'), 'modal carousel should start an interval for multi-image previews');
-assert.ok(html.includes('stopModalCarouselTimer();\n                modalOverlay.classList.remove'), 'closing the modal should clear the carousel timer');
+assert.match(html, /stopModalCarouselTimer\(\);\s*modalOverlay\.classList\.remove/, 'closing the modal should clear the carousel timer');
 assert.match(
   html,
   /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*?\.modal-overlay\.active \.modal-content,[\s\S]*?\.modal-overlay\.active \.modal-media[\s\S]*?animation:\s*none;/,
   'modal opening animation should respect reduced motion preferences',
 );
+assert.ok(html.includes('id="maintenanceNotice"'), 'page should include a persistent maintenance notice container');
+assert.ok(html.includes('maintenance-notice.json'), 'page should fetch the sibling maintenance notice JSON');
+assert.ok(html.includes('NOTICE_CACHE_TTL_MS = 60000'), 'maintenance notice should use a short cache window');
+assert.ok(html.includes("cache: 'no-store'"), 'maintenance notice fetch should bypass long browser caching');
+assert.ok(html.includes('function buildMaintenanceNoticeUrl()'), 'maintenance notice should cache-bust fetches');
+assert.ok(html.includes('function applyMaintenanceNotice(notice)'), 'maintenance notice should render JSON fields');
+assert.ok(html.includes('maintenanceNotice.hidden = false;'), 'valid maintenance notices should become visible');
+assert.ok(html.includes('maintenanceNotice.hidden = true;'), 'missing or disabled notices should stay hidden');
+assert.match(
+  html,
+  /\.maintenance-card\s*\{[^}]*max-width:\s*300px;[^}]*background:\s*#fffaf5;[^}]*border-radius:\s*16px;/s,
+  'maintenance notice should use the provided mini orange card style',
+);
+assert.match(
+  html,
+  /\.card-header\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*flex-start;/s,
+  'maintenance notice header should be left aligned',
+);
+assert.match(
+  html,
+  /\.time-block\s*\{[^}]*background:\s*#fef3e9;[^}]*padding:\s*0\.2rem 0\.7rem;[^}]*border:\s*1px solid #fad7b3;/s,
+  'maintenance notice should use the compact orange time pill from the mini reference',
+);
+assert.match(
+  html,
+  /\.card-footer-note\s*\{[^}]*justify-content:\s*flex-start;/s,
+  'maintenance notice footer status should be left aligned',
+);
+assert.match(
+  html,
+  /\[data-theme="dark"\] \.card-body p,[\s\S]*?\[data-theme="dark"\] \.time-text,[\s\S]*?\[data-theme="dark"\] \.card-footer-note\s*\{[^}]*color:\s*#e5e5e5;/s,
+  'dark theme maintenance notice text should remain readable',
+);
+assert.match(
+  html,
+  /\[data-theme="dark"\] \.maintenance-card\s*\{[^}]*background:\s*linear-gradient\(145deg,\s*rgba\(255,\s*255,\s*255,\s*0\.1\),\s*rgba\(255,\s*255,\s*255,\s*0\.04\)\);[^}]*border:\s*1px solid rgba\(255,\s*255,\s*255,\s*0\.12\);/s,
+  'dark theme maintenance card should use neutral glass colors instead of a brown block',
+);
+assert.match(
+  html,
+  /\[data-theme="dark"\] \.time-block\s*\{[^}]*background:\s*rgba\(255,\s*255,\s*255,\s*0\.08\);[^}]*border-color:\s*rgba\(255,\s*255,\s*255,\s*0\.14\);/s,
+  'dark theme time pill should align with the dark glass UI',
+);
+assert.match(
+  html,
+  /\[data-theme="dark"\] \.card-title\s*\{[^}]*color:\s*#f5f5f5;/s,
+  'dark theme title should use neutral foreground text',
+);
+assert.match(
+  html,
+  /\[data-theme="dark"\] \.highlight-badge\s*\{[^}]*background:\s*rgba\(251,\s*146,\s*60,\s*0\.16\);[^}]*color:\s*#fdba74;/s,
+  'dark theme badge should keep orange as a small accent',
+);
+assert.ok(html.includes('class="icon-warning"'), 'maintenance notice should render the warning icon');
+assert.ok(html.includes('id="maintenanceClose"'), 'maintenance notice should render a close button');
+assert.ok(html.includes('class="maintenance-close"'), 'maintenance notice close button should use a dedicated style');
+assert.ok(html.includes('class="card-title"'), 'maintenance notice should render the title');
+assert.ok(html.includes('class="time-block"'), 'maintenance notice should render a concrete time block');
+assert.ok(html.includes("badge.className = 'highlight-badge';"), 'maintenance notice should include the planned badge from the reference style');
+assert.ok(html.includes('class="card-body"'), 'maintenance notice should render the concrete notice body');
+assert.ok(html.includes('class="card-footer-note"'), 'maintenance notice should render a generated status footer');
+assert.ok(html.includes('id="maintenanceStatusText"'), 'maintenance notice should expose a dynamic status text target');
+assert.ok(html.includes('maintenanceContent'), 'maintenance notice should render the actual notice content');
+assert.ok(html.includes('function getLocalizedMaintenanceNotice(notice, lang)'), 'maintenance notice should choose content by page language');
+assert.ok(html.includes('function renderMaintenanceContent(content, notice, lang)'), 'maintenance notice should render newline-separated content as separate lines');
+assert.ok(html.includes("content.split('\\n')"), 'maintenance notice should preserve explicit line breaks from JSON');
+assert.ok(html.includes('function getMaintenanceStatusText(notice, lang)'), 'maintenance notice should generate status text from start and end times');
+assert.ok(html.includes('function getMaintenanceDurationHours(notice)'), 'maintenance notice should calculate the estimated duration');
+assert.ok(html.includes('let maintenanceNoticeDismissed = false;'), 'maintenance notice dismissal should only live in memory until refresh');
+assert.ok(html.includes('maintenanceNoticeDismissed = true;'), 'clicking close should mark the notice dismissed for this page view');
+assert.ok(html.includes('maintenanceClose.addEventListener'), 'maintenance close button should hide the notice on click');
+assert.doesNotMatch(html, /sessionStorage\.setItem\([^)]*maintenance/i, 'maintenance dismissal should not persist in sessionStorage');
+assert.doesNotMatch(html, /localStorage\.setItem\([^)]*maintenance/i, 'maintenance dismissal should not persist in localStorage');
+assert.ok(html.includes('currentMaintenanceNotice'), 'maintenance notice should keep the fetched notice for language switching');
+assert.match(
+  html,
+  /setLanguage\(lang, options = \{\}\)[\s\S]*?applyMaintenanceNotice\(currentMaintenanceNotice\);/s,
+  'language switching should refresh the maintenance notice without refetching',
+);
+assert.doesNotMatch(html, /id="maintenanceStatus"/, 'maintenance notice should not render the raw status label');
+assert.doesNotMatch(html, /id="maintenanceTimestamp"/, 'maintenance notice should not render the update timestamp line');
+assert.doesNotMatch(html, /maintenanceTimestamp/, 'maintenance notice script should not write the update timestamp line');
+assert.doesNotMatch(html, /更新：/, 'maintenance notice should not show an update prefix in the UI');
+assert.ok(html.includes('即将开始'), 'Chinese status text should be fixed in HTML/JS');
+assert.ok(html.includes('约 '), 'Chinese duration text should use the mini wording');
+assert.equal(maintenanceNotice.enabled, true, 'sample maintenance notice should be enabled');
+assert.equal(maintenanceNotice.status, 'scheduled', 'sample maintenance notice should be scheduled');
+assert.ok(maintenanceNotice.timestamp, 'maintenance notice should include an update timestamp');
+assert.ok(maintenanceNotice.startAt, 'maintenance notice should include a machine-readable start time');
+assert.ok(maintenanceNotice.endAt, 'maintenance notice should include a machine-readable end time');
+assert.ok(maintenanceNotice.zh, 'maintenance notice should include Chinese content');
+assert.ok(maintenanceNotice.en, 'maintenance notice should include English content');
+for (const lang of ['zh', 'en']) {
+  assert.ok(maintenanceNotice[lang].title, `${lang} maintenance notice should include a title`);
+  assert.ok(maintenanceNotice[lang].timeUtc8.includes('UTC+8'), `${lang} maintenance notice should describe the maintenance window in UTC+8`);
+  assert.ok(maintenanceNotice[lang].content.includes('Flare LaunchPad'), `${lang} maintenance notice should include the actual affected products in content`);
+  assert.ok(maintenanceNotice[lang].content.includes('\n'), `${lang} maintenance notice should preserve the second sentence on a new line`);
+  assert.equal(maintenanceNotice[lang].scope, undefined, `${lang} maintenance notice should not split content into scope`);
+  assert.equal(maintenanceNotice[lang].detail, undefined, `${lang} maintenance notice should not split content into detail`);
+}
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

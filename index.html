@@ -181,6 +181,237 @@
             line-height: 1;
         }
 
+        /* ----- 维护通知卡片 ----- */
+        .maintenance-card {
+            position: fixed;
+            right: 5%;
+            bottom: 5%;
+            transform: translateX(-50%);
+            z-index: 120;
+            max-width: 300px;
+            width: min(300px, calc(100vw - 22rem));
+            background: #fffaf5;
+            border-radius: 16px;
+            padding: 1rem 1.2rem 1.2rem;
+            box-shadow: 0 6px 20px -6px rgba(180, 80, 0, 0.15),
+                0 2px 8px rgba(180, 80, 0, 0.05);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .maintenance-card[hidden] {
+            display: none;
+        }
+
+        .maintenance-card:hover {
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        [data-theme="dark"] .maintenance-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45),
+                0 0 0 1px rgba(249, 115, 22, 0.08);
+            backdrop-filter: blur(18px);
+        }
+
+        .maintenance-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 24px;
+            height: 24px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(160, 64, 0, 0.08);
+            color: #a04000;
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .maintenance-close:hover {
+            background: rgba(160, 64, 0, 0.16);
+            transform: scale(1.06);
+        }
+
+        [data-theme="dark"] .maintenance-close {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e5e5e5;
+        }
+
+        [data-theme="dark"] .maintenance-close:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.4rem;
+            margin-bottom: 0.7rem;
+            padding-right: 1.5rem;
+        }
+
+        .icon-warning {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            background: #fdebd0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d35400;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1;
+            box-shadow: 0 2px 6px rgba(211, 84, 0, 0.12);
+        }
+
+        [data-theme="dark"] .icon-warning {
+            background: rgba(249, 115, 22, 0.16);
+            color: #fdba74;
+            box-shadow: 0 0 18px rgba(249, 115, 22, 0.18);
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #a04000;
+            letter-spacing: 0;
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        [data-theme="dark"] .card-title {
+            color: #f5f5f5;
+        }
+
+        .time-block {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #fef3e9;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            margin: 0 0 0.7rem;
+            width: fit-content;
+            max-width: 100%;
+            border: 1px solid #fad7b3;
+        }
+
+        [data-theme="dark"] .time-block {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .time-icon {
+            font-size: 0.7rem;
+            line-height: 1;
+            color: #b85e0e;
+        }
+
+        [data-theme="dark"] .time-icon {
+            color: #fdba74;
+        }
+
+        .time-text {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #8b4513;
+            letter-spacing: 0.1px;
+            line-height: 1.35;
+            white-space: nowrap;
+        }
+
+        .card-body {
+            margin-top: 0.2rem;
+        }
+
+        .card-body p {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #4d2e15;
+            margin: 0 0 0.3rem;
+            text-align: left;
+        }
+
+        .card-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        [data-theme="dark"] .card-body p,
+        [data-theme="dark"] .time-text,
+        [data-theme="dark"] .card-footer-note {
+            color: #e5e5e5;
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            background: #f5cba7;
+            color: #7b3f00;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.05rem 0.5rem;
+            border-radius: 20px;
+            margin-right: 0.15rem;
+            letter-spacing: 0.2px;
+            vertical-align: 0.08em;
+        }
+
+        [data-theme="dark"] .highlight-badge {
+            background: rgba(251, 146, 60, 0.16);
+            color: #fdba74;
+        }
+
+        .card-footer-note {
+            margin-top: 0.9rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed #eed7c4;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            font-size: 0.65rem;
+            color: #8b5a3a;
+        }
+
+        [data-theme="dark"] .card-footer-note {
+            border-top-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .card-footer-note .dot {
+            display: inline-block;
+            flex: 0 0 auto;
+            width: 5px;
+            height: 5px;
+            background: #e67e22;
+            border-radius: 50%;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        [data-theme="dark"] .card-footer-note .dot {
+            background: #fb923c;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+        }
+
         @media (max-width: 640px) {
             .top-controls {
                 top: 1rem;
@@ -195,6 +426,32 @@
 
             .top-controls .icon {
                 font-size: 0.85rem;
+            }
+
+            .maintenance-card {
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                width: auto;
+                max-width: none;
+                padding: 1rem 1.1rem 1.1rem;
+                border-radius: 16px;
+            }
+
+            .maintenance-card:hover {
+                transform: translateY(-2px);
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .time-text {
+                font-size: 0.48rem;
+            }
+
+            .card-body p {
+                font-size: 0.78rem;
             }
         }
 
@@ -885,6 +1142,25 @@
 
 <body>
 
+    <aside class="maintenance-card" id="maintenanceNotice" role="status" aria-live="polite" hidden>
+        <button class="maintenance-close" id="maintenanceClose" type="button" aria-label="关闭维护通知" title="关闭维护通知">&times;</button>
+        <div class="card-header">
+            <div class="icon-warning" aria-hidden="true">⚠</div>
+            <h2 class="card-title" id="maintenanceTitle">服务器维护通知</h2>
+        </div>
+        <div class="time-block">
+            <span class="time-icon" aria-hidden="true">🕒</span>
+            <span class="time-text" id="maintenanceTime"></span>
+        </div>
+        <div class="card-body">
+            <div id="maintenanceContent"></div>
+        </div>
+        <div class="card-footer-note">
+            <span class="dot"></span>
+            <span id="maintenanceStatusText">维护状态：即将开始 · 预计持续 1 小时</span>
+        </div>
+    </aside>
+
     <!-- 右上角控制按钮 -->
     <div class="top-controls">
         <button id="themeToggle" aria-label="切换深浅色模式">
@@ -1213,6 +1489,7 @@
             // ----- DOM 引用 -----
             const html = document.documentElement;
             const themeMeta = document.querySelector('meta[name="theme-color"]');
+            const NOTICE_CACHE_TTL_MS = 60000;
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = document.getElementById('themeIcon');
             const themeLabel = document.getElementById('themeLabel');
@@ -1226,6 +1503,12 @@
             const pagination = document.getElementById('pagination');
             const total = sections.length;
             const projectsGrid = document.getElementById('projectsGrid');
+            const maintenanceNotice = document.getElementById('maintenanceNotice');
+            const maintenanceTitle = document.getElementById('maintenanceTitle');
+            const maintenanceTime = document.getElementById('maintenanceTime');
+            const maintenanceContent = document.getElementById('maintenanceContent');
+            const maintenanceStatusText = document.getElementById('maintenanceStatusText');
+            const maintenanceClose = document.getElementById('maintenanceClose');
 
             // 模态框元素
             const modalOverlay = document.getElementById('modalOverlay');
@@ -1243,6 +1526,8 @@
             let currentModalMediaIndex = 0;
             let currentModalMediaAlt = '';
             let modalCarouselTimer = null;
+            let currentMaintenanceNotice = null;
+            let maintenanceNoticeDismissed = false;
 
             // ----- 1. 生成导航点 -----
             for (let i = 0; i < total; i++) {
@@ -1270,7 +1555,176 @@
                 });
             }
 
-            // ----- 3. 点击导航点跳转 -----
+            // ----- 3. 维护通知 -----
+            function buildMaintenanceNoticeUrl() {
+                const cacheKey = Math.floor(Date.now() / NOTICE_CACHE_TTL_MS);
+                return `./maintenance-notice.json?t=${cacheKey}`;
+            }
+
+            function getLocalizedMaintenanceNotice(notice, lang) {
+                const localized = notice[lang] || notice.zh || notice.en || notice;
+                return {
+                    title: String(localized.title || '服务器维护通知'),
+                    timeUtc8: String(localized.timeUtc8 || localized.time || ''),
+                    content: String(localized.content || notice.content || '')
+                };
+            }
+
+            function getMaintenanceDurationHours(notice) {
+                const startTime = new Date(notice.startAt).getTime();
+                const endTime = new Date(notice.endAt).getTime();
+                if (!Number.isFinite(startTime) || !Number.isFinite(endTime) || endTime <= startTime) {
+                    return null;
+                }
+                const hours = (endTime - startTime) / 3600000;
+                return Number.isInteger(hours) ? hours : Number(hours.toFixed(1));
+            }
+
+            function getMaintenancePhase(notice) {
+                const now = Date.now();
+                const startTime = new Date(notice.startAt).getTime();
+                const endTime = new Date(notice.endAt).getTime();
+                if (Number.isFinite(startTime) && now < startTime) {
+                    return 'upcoming';
+                }
+                if (Number.isFinite(startTime) && Number.isFinite(endTime) && now >= startTime && now <= endTime) {
+                    return 'active';
+                }
+                if (Number.isFinite(endTime) && now > endTime) {
+                    return 'ended';
+                }
+                return notice.status || 'scheduled';
+            }
+
+            function getMaintenanceBadgeText(notice, lang) {
+                const phase = getMaintenancePhase(notice);
+                const zhBadge = {
+                    upcoming: '计划中',
+                    active: '维护中',
+                    ended: '已结束',
+                    scheduled: '计划中'
+                };
+                const enBadge = {
+                    upcoming: 'Planned',
+                    active: 'In progress',
+                    ended: 'Ended',
+                    scheduled: 'Planned'
+                };
+                return lang === 'zh' ? (zhBadge[phase] || zhBadge.scheduled) : (enBadge[phase] || enBadge.scheduled);
+            }
+
+            function formatMaintenanceDuration(hours, lang) {
+                if (!Number.isFinite(hours)) {
+                    return lang === 'zh' ? '未知' : 'unknown';
+                }
+                return lang === 'zh' ? `${hours} 小时` : `${hours} hour${hours === 1 ? '' : 's'}`;
+            }
+
+            function getMaintenanceStatusText(notice, lang) {
+                const phase = getMaintenancePhase(notice);
+                const duration = getMaintenanceDurationHours(notice);
+                const zhStatus = {
+                    upcoming: '即将开始',
+                    active: '进行中',
+                    ended: '已结束',
+                    scheduled: '即将开始'
+                };
+                const enStatus = {
+                    upcoming: 'Upcoming',
+                    active: 'In progress',
+                    ended: 'Ended',
+                    scheduled: 'Upcoming'
+                };
+                if (lang === 'zh') {
+                    return `${zhStatus[phase] || zhStatus.scheduled} · 约 ${formatMaintenanceDuration(duration, lang)}`;
+                }
+                return `${enStatus[phase] || enStatus.scheduled} · about ${formatMaintenanceDuration(duration, lang)}`;
+            }
+
+            function renderMaintenanceContent(content, notice, lang) {
+                maintenanceContent.textContent = '';
+                const lines = content.split('\n').map(line => line.trim()).filter(Boolean);
+                lines.forEach((line, index) => {
+                    const paragraph = document.createElement('p');
+                    if (index === 0) {
+                        const badge = document.createElement('span');
+                        badge.className = 'highlight-badge';
+                        badge.textContent = getMaintenanceBadgeText(notice, lang);
+                        paragraph.appendChild(badge);
+                    }
+                    paragraph.appendChild(document.createTextNode(line));
+                    maintenanceContent.appendChild(paragraph);
+                });
+            }
+
+            function applyMaintenanceNotice(notice) {
+                if (!maintenanceNotice) {
+                    return;
+                }
+                if (maintenanceNoticeDismissed) {
+                    maintenanceNotice.hidden = true;
+                    console.debug('【维护通知】通知已被当前页面关闭');
+                    return;
+                }
+                if (!notice || notice.enabled === false) {
+                    maintenanceNotice.hidden = true;
+                    console.debug('【维护通知】通知未启用或内容为空');
+                    return;
+                }
+
+                const localizedNotice = getLocalizedMaintenanceNotice(notice, currentLang);
+                if (!localizedNotice.timeUtc8 && !localizedNotice.content) {
+                    maintenanceNotice.hidden = true;
+                    console.debug(`【维护通知】通知缺少必要内容：lang=${currentLang}, status=${notice.status || 'empty'}`);
+                    return;
+                }
+
+                maintenanceTitle.textContent = localizedNotice.title;
+                maintenanceTime.textContent = localizedNotice.timeUtc8;
+                renderMaintenanceContent(localizedNotice.content, notice, currentLang);
+                maintenanceStatusText.textContent = getMaintenanceStatusText(notice, currentLang);
+                if (maintenanceClose) {
+                    const closeLabel = currentLang === 'zh' ? '关闭维护通知' : 'Close maintenance notice';
+                    maintenanceClose.setAttribute('aria-label', closeLabel);
+                    maintenanceClose.title = closeLabel;
+                }
+                maintenanceNotice.hidden = false;
+                console.debug(`【维护通知】通知加载成功：lang=${currentLang}, status=${notice.status || 'none'}, duration=${getMaintenanceDurationHours(notice) || 'unknown'}`);
+            }
+
+            async function loadMaintenanceNotice() {
+                if (!maintenanceNotice) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(buildMaintenanceNoticeUrl(), { cache: 'no-store' });
+                    if (response.status === 404) {
+                        maintenanceNotice.hidden = true;
+                        console.debug('【维护通知】未发现通知文件：status=404');
+                        return;
+                    }
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    currentMaintenanceNotice = await response.json();
+                    applyMaintenanceNotice(currentMaintenanceNotice);
+                } catch (error) {
+                    currentMaintenanceNotice = null;
+                    maintenanceNotice.hidden = true;
+                    console.debug(`【维护通知】通知加载失败：reason=${error.message}`);
+                }
+            }
+
+            if (maintenanceClose) {
+                maintenanceClose.addEventListener('click', function() {
+                    maintenanceNoticeDismissed = true;
+                    maintenanceNotice.hidden = true;
+                    console.debug('【维护通知】用户关闭通知：scope=current-page');
+                });
+            }
+
+            // ----- 4. 点击导航点跳转 -----
             dots.forEach((dot) => {
                 dot.addEventListener('click', function() {
                     const index = parseInt(this.dataset.index, 10);
@@ -1660,6 +2114,7 @@
 
                 // 重新渲染卡片
                 renderProjects();
+                applyMaintenanceNotice(currentMaintenanceNotice);
 
                 if (shouldPersist) {
                     savePreference('preferredLang', normalizedLang, '语言设置');
@@ -1725,6 +2180,7 @@
             // 初始化语言（会更新标题、关键词、描述和所有文本）
             setLanguage(initialLanguage.lang, { persist: false, source: initialLanguage.source });
             setTheme(initialTheme.theme, { persist: false, source: initialTheme.source });
+            loadMaintenanceNotice();
 
             window.addEventListener('load', function() {
                 console.debug(`【页面初始化】资源加载完成：lang=${currentLang}, theme=${currentTheme}, resolvedTheme=${getResolvedTheme(currentTheme)}`);
