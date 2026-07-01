@@ -606,7 +606,7 @@
         .modal-content {
             background: var(--modal-bg);
             border-radius: 24px;
-            max-width: 760px;
+            max-width: 1040px;
             width: 100%;
             padding: 2rem;
             position: relative;
@@ -1242,6 +1242,7 @@
             let currentModalMediaItems = [];
             let currentModalMediaIndex = 0;
             let currentModalMediaAlt = '';
+            let modalCarouselTimer = null;
 
             // ----- 1. 生成导航点 -----
             for (let i = 0; i < total; i++) {
@@ -1459,6 +1460,28 @@
                 console.debug(`【项目预览】轮播控件渲染完成：total=${mediaItems.length}`);
             }
 
+            function stopModalCarouselTimer() {
+                if (!modalCarouselTimer) {
+                    return;
+                }
+
+                clearInterval(modalCarouselTimer);
+                modalCarouselTimer = null;
+                console.debug('【项目预览】自动轮播已停止');
+            }
+
+            function startModalCarouselTimer(mediaItems) {
+                stopModalCarouselTimer();
+                if (mediaItems.length <= 1) {
+                    return;
+                }
+
+                modalCarouselTimer = setInterval(() => {
+                    showModalMedia(currentModalMediaIndex + 1);
+                }, 4200);
+                console.debug(`【项目预览】自动轮播已启动：total=${mediaItems.length}, intervalMs=4200`);
+            }
+
             function openModal(index) {
                 const project = projectsData[index];
                 const name = i18n[currentLang][project.nameKey] || '项目';
@@ -1472,6 +1495,7 @@
                 currentModalMediaAlt = name;
                 renderModalCarousel(mediaItems);
                 showModalMedia(0);
+                startModalCarouselTimer(mediaItems);
                 modalTitle.textContent = name;
                 modalDesc.textContent = desc;
                 modalTags.textContent = tags;
@@ -1491,6 +1515,7 @@
             });
 
             function closeModal() {
+                stopModalCarouselTimer();
                 modalOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }

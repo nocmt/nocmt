@@ -168,6 +168,18 @@ assert.ok(html.includes('animation: modalContentEnter'), 'active modal should an
 assert.ok(html.includes('animation: modalMediaEnter'), 'active modal should animate media in');
 assert.match(
   html,
+  /\.modal-content\s*\{[^}]*max-width:\s*1040px;/s,
+  'project modal should be large enough to showcase screenshots',
+);
+assert.ok(html.includes('let modalCarouselTimer = null;'), 'modal carousel should track a single timer');
+assert.ok(html.includes('function stopModalCarouselTimer()'), 'modal carousel should expose timer cleanup');
+assert.ok(html.includes('clearInterval(modalCarouselTimer);'), 'modal carousel should clear its timer on cleanup');
+assert.ok(html.includes('function startModalCarouselTimer(mediaItems)'), 'modal carousel should auto-play multi-image previews');
+assert.ok(html.includes('stopModalCarouselTimer();\n                if (mediaItems.length <= 1)'), 'modal carousel should stop old timers before deciding whether to autoplay');
+assert.ok(html.includes('modalCarouselTimer = setInterval'), 'modal carousel should start an interval for multi-image previews');
+assert.ok(html.includes('stopModalCarouselTimer();\n                modalOverlay.classList.remove'), 'closing the modal should clear the carousel timer');
+assert.match(
+  html,
   /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*?\.modal-overlay\.active \.modal-content,[\s\S]*?\.modal-overlay\.active \.modal-media[\s\S]*?animation:\s*none;/,
   'modal opening animation should respect reduced motion preferences',
 );
